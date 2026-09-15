@@ -68,16 +68,16 @@ function SettingsPage({ theme, toggleTheme, onNavigate, user, onLogout }) {
           <div className="settings-section-title">Profile</div>
           <div className="settings-row">
             <span className="settings-label">Display Name</span>
-            <span className="settings-value">{user.name}</span>
+            <span className="settings-value">{user?.name || 'User'}</span>
           </div>
           <div className="settings-row">
             <span className="settings-label">Email</span>
-            <span className="settings-value">{user.email}</span>
+            <span className="settings-value">{user?.email || ''}</span>
           </div>
           <div className="settings-row">
             <span className="settings-label">Signed in with</span>
             <span className="settings-value">
-              {user.providers
+              {(Array.isArray(user?.providers) ? user.providers : [user?.provider || 'local'])
                 .map((p) => (p === 'google' ? 'Google' : p === 'local' ? 'Password' : p))
                 .join(', ')}
             </span>
