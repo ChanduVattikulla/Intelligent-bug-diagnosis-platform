@@ -9,8 +9,16 @@ export function AuthProvider({ children }) {
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
-    setUser(auth.getCurrentUser());
-    setIsReady(true);
+    let mounted = true;
+    auth.verifyBackendSession().then((verifiedUser) => {
+      if (mounted) {
+        setUser(verifiedUser || auth.getCurrentUser());
+        setIsReady(true);
+      }
+    });
+    return () => {
+      mounted = false;
+    };
   }, []);
 
   const register = useCallback(async (fields) => {

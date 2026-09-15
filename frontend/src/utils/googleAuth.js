@@ -42,7 +42,8 @@ function decodeJwt(token) {
 }
 
 export function isGoogleConfigured() {
-  return Boolean(process.env.REACT_APP_GOOGLE_CLIENT_ID);
+  const id = process.env.REACT_APP_GOOGLE_CLIENT_ID;
+  return Boolean(id && id.trim() && id !== 'YOUR_GOOGLE_CLIENT_ID_HERE');
 }
 
 /**

@@ -13,6 +13,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent  # backend/
 DATABASE_URL = os.getenv("DATABASE_URL", "")
 EMBEDDING_MODEL_NAME = os.getenv("EMBEDDING_MODEL_NAME", "all-MiniLM-L6-v2")
 FRONTEND_ORIGIN = os.getenv("FRONTEND_ORIGIN", "http://localhost:3000")
+JWT_SECRET = os.getenv("JWT_SECRET", "bugfix-ai-secure-jwt-secret-key-2026")
+JWT_ALGORITHM = "HS256"
+JWT_EXPIRATION_DAYS = int(os.getenv("JWT_EXPIRATION_DAYS", "30"))
 
 # Optional OpenAI-compatible hosted model. When absent, the deterministic
 # offline agents remain available and reports label that mode explicitly.
