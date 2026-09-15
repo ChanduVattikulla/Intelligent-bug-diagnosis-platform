@@ -1,0 +1,241 @@
+/* src/styles/SettingsPage.css */
+
+.settings-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  background: var(--bg-primary);
+  margin-left: 250px;
+  height: 100vh;
+  transition: margin-left 0.25s ease;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.settings-card {
+  max-width: 620px;
+  width: 100%;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 28px 32px;
+  box-shadow: 0 1px 3px var(--shadow-color);
+  position: relative;
+}
+
+.settings-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: var(--text-secondary);
+  padding: 4px 6px;
+  border-radius: 4px;
+  transition: background 0.15s;
+}
+.settings-close-btn:hover {
+  background: var(--bg-agent);
+}
+
+.settings-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 4px;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.settings-subtitle {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 0 0 24px;
+}
+
+.settings-section {
+  margin-bottom: 20px;
+}
+
+.settings-section-title {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.settings-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border-color);
+  gap: 16px;
+}
+
+.settings-row:last-child {
+  border-bottom: none;
+}
+
+.settings-label {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.settings-label-desc {
+  font-size: 12.5px;
+  color: var(--text-secondary);
+  font-weight: 400;
+  margin-left: 6px;
+}
+
+.settings-value {
+  font-size: 13.5px;
+  color: var(--text-secondary);
+}
+
+.settings-toggle-btn {
+  background: var(--accent);
+  color: var(--accent-contrast);
+  border: none;
+  padding: 5px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  transition: background 0.15s;
+}
+.settings-toggle-btn:hover {
+  background: var(--accent-hover);
+}
+
+.settings-switch {
+  width: 36px;
+  height: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.2s;
+  flex-shrink: 0;
+  background: var(--border-strong);
+  border: none;
+  padding: 0;
+}
+.settings-switch.on {
+  background: var(--accent);
+}
+.settings-switch-knob {
+  width: 14px;
+  height: 14px;
+  background: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  transition: left 0.2s;
+}
+.settings-switch.on .settings-switch-knob {
+  left: 19px;
+}
+
+.settings-input-group {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex: 1;
+  max-width: 300px;
+}
+
+.settings-input {
+  flex: 1;
+  min-width: 0;
+  padding: 6px 10px;
+  border-radius: 5px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-input);
+  color: var(--text-primary);
+  font-size: 13px;
+  outline: none;
+}
+.settings-input:focus-visible {
+  border-color: var(--accent);
+}
+.settings-input.invalid {
+  border-color: var(--danger);
+}
+
+.settings-error {
+  font-size: 12px;
+  color: var(--danger);
+  margin-top: 4px;
+}
+
+.settings-small-btn {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+.settings-small-btn:hover:not(:disabled) {
+  background: var(--bg-agent);
+}
+.settings-small-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.settings-danger-btn {
+  background: var(--danger);
+  color: white;
+  border: none;
+  padding: 5px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  transition: background 0.15s;
+}
+.settings-danger-btn:hover {
+  background: var(--danger-hover);
+}
+
+.settings-version {
+  text-align: center;
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 4px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border-color);
+}
+
+.settings-saved-note {
+  font-size: 12px;
+  color: var(--success);
+  margin-top: 4px;
+}
+
+@media (max-width: 768px) {
+  .settings-container {
+    margin-left: 0;
+    padding: 20px 16px;
+  }
+  .settings-card {
+    padding: 20px;
+  }
+  .settings-row {
+    flex-wrap: wrap;
+  }
+}

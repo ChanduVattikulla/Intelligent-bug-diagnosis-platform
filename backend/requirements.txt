@@ -1,0 +1,22 @@
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+python-multipart==0.0.9
+pydantic==2.9.2
+sqlalchemy>=2.0.53
+psycopg2-binary>=2.9.13
+pgvector==0.3.6
+
+# CPU-only torch build — without this line, pip installs the default build,
+# which pulls in ~2GB of NVIDIA/CUDA packages you don't need unless you have
+# a GPU. This line points pip at PyTorch's CPU-only wheels instead.
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch
+
+sentence-transformers==3.1.1
+pandas>=2.2.3
+python-dotenv==1.0.1
+httpx==0.27.2
+
+# For running tests (tests/test_bug_submission.py)
+pytest==8.3.3
+httpx==0.27.2

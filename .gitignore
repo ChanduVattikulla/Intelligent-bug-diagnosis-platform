@@ -1,0 +1,32 @@
+# Environment and Secrets (DO NOT COMMIT REAL KEYS)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env
+!.env.example
+
+# Python virtual environments & cache
+venv/
+.venv/
+venv2/
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# Node.js dependencies & builds
+node_modules/
+/frontend/node_modules/
+build/
+/frontend/build/
+.DS_Store
+
+# Local SQLite databases or temporary logs
+*.db
+*.log
+
+# Large dataset files exceeding GitHub 100MB limit
+data/raw/deep_data.csv
+data/raw/classifier_data_*.csv

@@ -1,0 +1,329 @@
+/* src/styles/Sidebar.css */
+
+.sidebar {
+  width: 250px;
+  background: var(--bg-sidebar);
+  color: var(--sidebar-text);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 14px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transition: transform 0.25s ease, background 0.2s ease;
+  z-index: 1000;
+  overflow-y: auto;
+  border-right: 1px solid var(--sidebar-border);
+}
+
+.sidebar.closed {
+  transform: translateX(-100%);
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--sidebar-border);
+}
+
+.brand {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--sidebar-text);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: -0.01em;
+}
+
+.brand-icon {
+  color: var(--accent);
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: var(--sidebar-muted);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.close-btn:hover {
+  background: var(--sidebar-selected);
+  color: var(--sidebar-text);
+}
+
+.new-diagnosis-btn {
+  background: var(--accent);
+  color: var(--accent-contrast);
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  width: 100%;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: background 0.15s ease;
+}
+.new-diagnosis-btn:hover {
+  background: var(--accent-hover);
+}
+
+.search-box-wrapper {
+  position: relative;
+  width: 100%;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 10px;
+  color: var(--sidebar-muted);
+  pointer-events: none;
+}
+
+.search-box {
+  width: 100%;
+  padding: 7px 10px 7px 32px;
+  border-radius: 6px;
+  border: 1px solid var(--sidebar-border);
+  background: var(--bg-secondary);
+  color: var(--sidebar-text);
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+.search-box::placeholder {
+  color: var(--sidebar-muted);
+}
+.search-box:focus-visible {
+  border-color: var(--accent);
+}
+
+.nav-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 10px;
+  border-radius: 6px;
+  color: var(--sidebar-text);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  font-size: 13px;
+  font-weight: 400;
+}
+.nav-item:hover {
+  background: var(--sidebar-selected);
+}
+.nav-item.active {
+  background: var(--sidebar-selected);
+  color: var(--sidebar-text);
+  font-weight: 500;
+}
+.nav-item .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  flex-shrink: 0;
+  color: var(--sidebar-muted);
+}
+.nav-item.active .icon,
+.nav-item:hover .icon {
+  color: var(--accent);
+}
+.nav-item .label {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Chat history list nested under Diagnoses */
+.chat-list {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 4px;
+  min-height: 0;
+}
+
+.chat-list-empty {
+  color: var(--sidebar-muted);
+  font-size: 12px;
+  padding: 10px;
+  text-align: center;
+}
+
+.chat-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px 6px 28px;
+  border-radius: 6px;
+  color: var(--sidebar-text);
+  cursor: pointer;
+  font-size: 12.5px;
+  transition: background 0.15s;
+}
+.chat-item:hover {
+  background: var(--sidebar-selected);
+}
+.chat-item.active {
+  background: var(--sidebar-selected);
+  font-weight: 500;
+  color: var(--accent);
+}
+
+.chat-item-title {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chat-item-delete {
+  background: none;
+  border: none;
+  color: var(--sidebar-muted);
+  cursor: pointer;
+  padding: 3px;
+  border-radius: 4px;
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.15s;
+  flex-shrink: 0;
+}
+.chat-item:hover .chat-item-delete,
+.chat-item-delete:focus-visible {
+  opacity: 1;
+}
+.chat-item-delete:hover {
+  background: var(--danger-bg);
+  color: var(--danger);
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid var(--sidebar-border);
+  margin: 10px 0;
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  border-top: 1px solid var(--sidebar-border);
+  padding-top: 10px;
+  flex-shrink: 0;
+}
+
+.account-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  border-radius: 6px;
+}
+
+.account-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+
+.account-avatar-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--sidebar-selected);
+  color: var(--sidebar-text);
+  border: 1px solid var(--sidebar-border);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.account-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.account-name {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--sidebar-text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.account-email {
+  font-size: 11px;
+  color: var(--sidebar-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.logout-btn {
+  background: none;
+  border: 1px solid var(--sidebar-border);
+  color: var(--sidebar-text);
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 5px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.logout-btn:hover {
+  background: var(--danger-bg);
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 999;
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 260px;
+  }
+  .sidebar-overlay.show {
+    display: block;
+  }
+}
