@@ -26,12 +26,36 @@
   color: var(--text-primary);
   border: 1px solid var(--border-color);
   box-shadow: 0 1px 2px var(--shadow-color);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.message-bubble.assistant.diagnosis-bubble {
+  max-width: 100%;
+  width: 100%;
+  animation: reportExpand2D 550ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transform-origin: top left;
+  box-shadow: 0 4px 20px var(--shadow-color), 0 0 0 1px var(--border-color);
+}
+
+@keyframes reportExpand2D {
+  0% {
+    opacity: 0;
+    transform: scale(0.92, 0.7);
+  }
+  60% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1, 1);
+  }
 }
 
 /* Diagnosis Report Container fills the bubble's width */
 .diagnosis-report-container {
   width: 100%;
   max-width: 100%;
+  overflow: hidden;
 }
 
 .diagnosis-report {

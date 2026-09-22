@@ -553,6 +553,22 @@ body {
   transition: transform 0.2s ease;
 }
 
+.agent-pipeline-stages-wrapper {
+  display: grid;
+  grid-template-rows: 1fr;
+  transition: grid-template-rows 350ms cubic-bezier(0.16, 1, 0.3, 1), opacity 250ms ease;
+  opacity: 1;
+}
+
+.agent-pipeline-stages-wrapper.collapsed {
+  grid-template-rows: 0fr;
+  opacity: 0;
+}
+
+.agent-pipeline-stages-inner {
+  overflow: hidden;
+}
+
 .agent-pipeline-stages {
   margin-top: 12px;
   padding-top: 10px;

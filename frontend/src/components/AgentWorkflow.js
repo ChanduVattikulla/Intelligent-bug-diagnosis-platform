@@ -65,40 +65,42 @@ function AgentWorkflow({ agents, isLoading }) {
       </div>
 
       {/* Expandable Agent Stage List */}
-      {expanded && (
-        <div className="agent-pipeline-stages">
-          {agents.map((item) => {
-            const isDone = item.status.includes('Completed');
-            const isWorking = item.status.includes('In Progress');
+      <div className={`agent-pipeline-stages-wrapper ${expanded ? 'expanded' : 'collapsed'}`}>
+        <div className="agent-pipeline-stages-inner">
+          <div className="agent-pipeline-stages">
+            {agents.map((item) => {
+              const isDone = item.status.includes('Completed');
+              const isWorking = item.status.includes('In Progress');
 
-            return (
-              <div
-                key={item.agent}
-                className={`agent-stage-row ${isDone ? 'completed' : isWorking ? 'active' : 'pending'}`}
-              >
-                <div className="agent-stage-left">
-                  <div className="agent-stage-indicator">
-                    {isDone ? (
-                      <CheckIcon size={11} className="check-mark" />
-                    ) : isWorking ? (
-                      <SpinnerIcon size={11} className="working-spinner" />
-                    ) : (
-                      <span className="pending-dot" />
-                    )}
+              return (
+                <div
+                  key={item.agent}
+                  className={`agent-stage-row ${isDone ? 'completed' : isWorking ? 'active' : 'pending'}`}
+                >
+                  <div className="agent-stage-left">
+                    <div className="agent-stage-indicator">
+                      {isDone ? (
+                        <CheckIcon size={11} className="check-mark" />
+                      ) : isWorking ? (
+                        <SpinnerIcon size={11} className="working-spinner" />
+                      ) : (
+                        <span className="pending-dot" />
+                      )}
+                    </div>
+                    <span className="agent-stage-name">{item.agent}</span>
                   </div>
-                  <span className="agent-stage-name">{item.agent}</span>
-                </div>
 
-                <div className="agent-stage-right">
-                  <span className="agent-stage-badge">
-                    {isDone ? 'Done' : isWorking ? 'Running' : 'Queued'}
-                  </span>
+                  <div className="agent-stage-right">
+                    <span className="agent-stage-badge">
+                      {isDone ? 'Done' : isWorking ? 'Running' : 'Queued'}
+                    </span>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
-      )}
+      </div>
     </div>
   );
 }

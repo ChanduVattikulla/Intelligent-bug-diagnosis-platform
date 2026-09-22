@@ -223,9 +223,10 @@ function renderDiagnosis(report) {
 
 function MessageBubble({ message }) {
   const isUser = message.role === 'user';
+  const isDiagnosis = !isUser && message.content?.type === 'diagnosis';
   return (
-    <div className={`message-bubble ${isUser ? 'user' : 'assistant'}`}>
-      {isUser ? message.content : message.content?.type === 'diagnosis' ? renderDiagnosis(message.content) : renderContent(message.content)}
+    <div className={`message-bubble ${isUser ? 'user' : 'assistant'} ${isDiagnosis ? 'diagnosis-bubble' : ''}`}>
+      {isUser ? message.content : isDiagnosis ? renderDiagnosis(message.content) : renderContent(message.content)}
     </div>
   );
 }
