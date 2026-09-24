@@ -15,16 +15,23 @@ def is_configured() -> bool:
 
 def _json_from_content(content: str) -> dict:
     content = content.strip()
-    if content.startswith("```"):
+    if content.startswith("```json"):
+        content = content[7:].rsplit("```", 1)[0].strip()
+    elif content.startswith("```"):
         content = content.split("\n", 1)[-1].rsplit("```", 1)[0].strip()
+
     try:
         return json.loads(content)
     except json.JSONDecodeError:
-        # Fallback: search for first `{` and last `}`
+        # Fallback 1: search for first `{` and last `}`
         match = re.search(r"\{.*\}", content, re.DOTALL)
         if match:
-            return json.loads(match.group(0))
-        raise
+            try:
+                return json.loads(match.group(0))
+            except json.JSONDecodeError:
+                pass
+        # Fallback 2: return plain text content wrapped as answer
+        return {"answer": content}
 
 
 def complete_json(system_prompt: str, user_payload: dict) -> dict:

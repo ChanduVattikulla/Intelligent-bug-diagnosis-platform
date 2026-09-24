@@ -136,7 +136,7 @@ def _fallback_text_search(query: str, top_k: int = 5) -> List[Dict]:
         for rec, defect in rows:
             text_lower = rec.chunk_text.lower()
             matches_count = sum(1 for w in words if w in text_lower)
-            score = min(0.95, round(matches_count / max(len(words), 1), 4))
+            score = min(0.95, round(0.40 + (matches_count * 0.15), 4))
             results.append((score, rec, defect))
 
         results.sort(key=lambda x: x[0], reverse=True)
