@@ -22,10 +22,15 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
+cors_origins = [o.strip() for o in FRONTEND_ORIGIN.split(",") if o.strip() and o.strip() != "*"]
+if "http://localhost:3000" not in cors_origins:
+    cors_origins.append("http://localhost:3000")
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[FRONTEND_ORIGIN],
-    allow_credentials=True,
+    allow_origins=cors_origins if FRONTEND_ORIGIN != "*" else ["*"],
+    allow_origin_regex=r"https://.*\.vercel\.app",
+    allow_credentials=True if FRONTEND_ORIGIN != "*" else False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
