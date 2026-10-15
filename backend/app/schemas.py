@@ -65,3 +65,10 @@ class KnowledgeBaseSearchRequest(BaseModel):
 class KnowledgeBaseSearchResponse(BaseModel):
     query: str
     matches: List[SimilarBugMatch]
+
+
+class ResolveSubmissionRequest(BaseModel):
+    session_id: str
+    confirmed_fix: str = Field(..., min_length=10, max_length=5000)
+    root_cause_summary: str = Field(..., min_length=5, max_length=1000)
+    affected_component: Optional[str] = Field(default="", max_length=200)

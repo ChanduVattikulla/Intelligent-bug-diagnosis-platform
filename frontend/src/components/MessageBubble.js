@@ -41,6 +41,96 @@ function renderContent(content) {
   });
 }
 
+
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://127.0.0.1:8000';
+
+function ResolutionForm({ sessionId, initialResolution }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState(null);
+  const [fix, setFix] = useState('');
+  const [cause, setCause] = useState('');
+  const [component, setComponent] = useState('');
+
+  if (initialResolution || status === 'indexed') {
+    return (
+      <div className="resolution-badge">
+        <span>✓ Resolved & Indexed</span>
+      </div>
+    );
+  }
+
+  if (!isOpen) {
+    return (
+      <button className="mark-resolved-btn" onClick={() => setIsOpen(true)}>
+        Mark as Resolved
+      </button>
+    );
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setStatus(null);
+    try {
+      const res = await fetch(`${API_BASE_URL}/api/knowledge-base/resolve`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          session_id: sessionId,
+          confirmed_fix: fix,
+          root_cause_summary: cause,
+          affected_component: component
+        })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.detail || 'Failed to index');
+      setStatus('indexed');
+      setIsOpen(false);
+    } catch (err) {
+      setStatus(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="resolution-form-container">
+      <h4>Submit Resolution to Knowledge Base</h4>
+      {status && status !== 'indexed' && <div className="resolution-error">{status}</div>}
+      <form onSubmit={handleSubmit} className="resolution-form">
+        <textarea 
+          required 
+          minLength={10} 
+          placeholder="Confirmed Fix Details... (describe exactly what you did)" 
+          value={fix} 
+          onChange={e => setFix(e.target.value)}
+        />
+        <input 
+          type="text" 
+          required 
+          minLength={5} 
+          placeholder="Root Cause Summary" 
+          value={cause} 
+          onChange={e => setCause(e.target.value)}
+        />
+        <input 
+          type="text" 
+          placeholder="Affected Component (optional)" 
+          value={component} 
+          onChange={e => setComponent(e.target.value)}
+        />
+        <div className="resolution-actions">
+          <button type="button" onClick={() => setIsOpen(false)} className="resolution-cancel-btn">Cancel</button>
+          <button type="submit" disabled={loading} className="resolution-submit-btn">
+            {loading ? 'Submitting...' : 'Submit to Knowledge Base'}
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+}
+
 function FindingSection({ number, title, status, children, delay = 0 }) {
   const [isOpen, setIsOpen] = useState(true);
   return (
@@ -215,9 +305,12 @@ function renderDiagnosis(report) {
             <p className="diagnosis-note">Insufficient Evidence: no historical resolution was available for a specific recommendation.</p>
           )}
           <p className="diagnosis-note">{report.nextSteps}</p>
+        
         </FindingSection>
+        {report.sessionId && <ResolutionForm sessionId={report.sessionId} initialResolution={report.resolution} />}
       </div>
     </div>
+
   );
 }
 

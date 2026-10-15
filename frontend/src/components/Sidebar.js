@@ -12,12 +12,14 @@ import {
   LogoutIcon,
   PlusIcon,
   CloseIcon,
+  AnalyticsIcon,
 } from './Icons';
 
 const MENU_ITEMS = [
   { id: 'diagnoses', icon: <ChatIcon size={18} />, label: 'Diagnoses' },
   { id: 'history', icon: <HistoryIcon size={18} />, label: 'Bug History' },
   { id: 'knowledge', icon: <KnowledgeIcon size={18} />, label: 'Knowledge Base' },
+  { id: 'analytics', icon: <AnalyticsIcon size={18} />, label: 'Analytics' },
 ];
 
 const FOOTER_ITEMS = [{ id: 'settings', icon: <SettingsIcon size={18} />, label: 'Settings' }];

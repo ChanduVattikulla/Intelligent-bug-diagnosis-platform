@@ -6,7 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import FRONTEND_ORIGIN
 from app import database
-from app.routers import auth, bug_submission, diagnosis, knowledge_base
+from app.routers import auth, bug_submission, diagnosis, knowledge_base, analytics
 
 
 @asynccontextmanager
@@ -40,3 +40,4 @@ app.include_router(auth.router)
 app.include_router(bug_submission.router)
 app.include_router(knowledge_base.router)
 app.include_router(diagnosis.router)
+app.include_router(analytics.router)

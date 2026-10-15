@@ -83,9 +83,17 @@ def complete_json(system_prompt: str, user_payload: dict) -> dict:
 
 
 def generate_findings(context: dict, matches: list[dict]) -> dict:
+    compact_matches = [
+        {
+            "bug_id": m.get("source_bug_id") or m.get("metadata", {}).get("bug_id", ""),
+            "similarity": round(m.get("similarity_score", 0), 2),
+            "text": (m.get("text") or "")[:250],
+        }
+        for m in matches[:4]
+    ]
     return complete_json(
         """You are a senior software defect diagnostician. Analyze the supplied bug context and retrieved historical evidence. Return only JSON with keys root_cause and remediation. root_cause must contain status, hypothesis, confidence_score (0 to 1), reasoning, supporting_evidence (array). remediation must contain status and recommendations (array of objects with recommendation, basis, supporting_bug_id, supporting_evidence, confidence_score). Never claim certainty unsupported by evidence. Clearly label historical evidence versus reasoning. If evidence is weak, use insufficient_evidence.""",
-        {"bug_context": context, "historical_evidence": matches[:8]},
+        {"bug_context": context, "historical_evidence": compact_matches},
     )
 
 

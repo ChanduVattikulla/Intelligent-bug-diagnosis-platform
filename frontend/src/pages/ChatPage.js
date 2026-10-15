@@ -4,6 +4,7 @@ import Sidebar from '../components/Sidebar';
 import ChatArea from '../components/ChatArea';
 import SettingsPage from './SettingsPage';
 import HistoryPage from './HistoryPage';
+import AnalyticsPage from './AnalyticsPage';
 import { loadJSON, saveJSON, makeId } from '../utils/storage';
 import { runDiagnosis, runFollowUp, validateBugInput } from '../utils/diagnosisAgent';
 import { useAuth } from '../contexts/AuthContext';
@@ -271,6 +272,13 @@ function ChatPage() {
         />
       ) : activePage === 'history' ? (
         <HistoryPage onBack={() => setActivePage('diagnoses')} />
+      ) : activePage === 'analytics' ? (
+        <AnalyticsPage />
+      ) : activePage === 'knowledge' ? (
+        <div style={{ flex: 1, padding: '2rem', color: 'var(--text-primary)' }}>
+          <h2>Knowledge Base</h2>
+          <p>This is where you would view knowledge base articles.</p>
+        </div>
       ) : (
         <ChatArea
           messages={messages}
