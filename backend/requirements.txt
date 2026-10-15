@@ -4,6 +4,7 @@ python-multipart==0.0.9
 pydantic==2.9.2
 sqlalchemy>=2.0.53
 psycopg2-binary>=2.9.13
+psycopg[binary]>=3.1.18
 pgvector==0.3.6
 
 # CPU-only torch build — without this line, pip installs the default build,

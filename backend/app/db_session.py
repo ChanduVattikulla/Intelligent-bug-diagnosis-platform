@@ -16,7 +16,10 @@ def _database_error(message: str) -> None:
 
 
 if DATABASE_URL:
-    engine = create_engine(DATABASE_URL, pool_pre_ping=True)
+    db_url = DATABASE_URL
+    if db_url.startswith("postgres://"):
+        db_url = db_url.replace("postgres://", "postgresql://", 1)
+    engine = create_engine(db_url, pool_pre_ping=True)
     SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False)
 else:
     engine = None
